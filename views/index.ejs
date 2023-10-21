@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 100%;
+      position: relative;
+      margin: auto;
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent slides from wrapping to the next line */
+    }
+
+    /* Slide */
+    .slide {
+      display: inline-block;
+      
+    }
+
+    .slide img {
+      width: 600px;
+      height: 600px;
+    }
+
+   
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ecommerce App</h1>
+
+    <div class="cart-icon">
+      <a href="/shopping-cart">
+        <img src="images/cart.jpg" alt="Cart">
+      </a>
+    </div>
+
+    <h2>Products - Page <%= pageNumber %></h2>
+    <div class="products-container">
+      <% products.forEach(function(product, index) { %>
+        <div class="product-card">
+          <h3><%= product.name %></h3>
+          <img src="<%= product.image %>" alt="<%= product.name %>">
+          <p>Price: $<%= product.price %></p>
+          <p>Description: <%= product.description %></p>
+          <form action="/cart" method="GET">
+            <input type="hidden" name="productId" value="<%= product.id %>">
+            <button type="submit" onclick="showAlert()" class="button add-to-cart-button">Add to Cart</button>
+          </form>
+          <form action="/delete-item" method="POST">
+            <input type="hidden" name="productId" value="<%= product.id %>">
+            <button type="submit" class="button delete-button">Delete from Cart</button>
+          </form>
+          <a href="/product-details/<%= product.id %>" class="examine-link">Examine &rarr;</a>
+        </div>
+        
+      <% }) %>
+      <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <div class="slide">
+          <img src="/images/blue.jpg" alt="Slide 1">
+        </div>
+    
+        <!-- Slide 2 -->
+        <div class="slide">
+          <img src="/images/black.jpg" alt="Slide 2">
+        </div>
+    
+        <!-- Slide 3 -->
+        <div class="slide">
+          <img src="/images/green.jpg" alt="Slide 3">
+        </div>
+      </div>
+    </div>
+
+    <% if (previousPage !== null || nextPage !== null) { %>
+      <div class="pagination-container">
+        <% if (previousPage !== null) { %>
+          <a class="pagination-link previous-page" href="/?page=<%= previousPage %>">Previous Page</a>
+        <% } %>
+    
+        <% if (nextPage !== null) { %>
+          <a class="pagination-link next-page" href="/?page=<%= nextPage %>">Next Page</a>
+        <% } %>
+      </div>
+    <% } %>
+    
+    
+  </div>
+
+
+  <script>
+    function showAlert() {
+      alert('Item added to cart');
+    }
+  </script>
+</body>
+</html>

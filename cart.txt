@@ -1,0 +1,9 @@
+[
+  {
+    "id": "12",
+    "name": "Product 12",
+    "price": 9.99,
+    "description": "This is the third product",
+    "image": "images/pinkp.jpg"
+  }
+]

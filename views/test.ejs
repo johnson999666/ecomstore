@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="products-container">
+        <% products.forEach(function(product, index) { %>
+          <div class="product-card">
+            <h3><%= product.name %></h3>
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <p>Price: $<%= product.price %></p>
+            <p>Description: <%= product.description %></p>
+            <form action="/products/<%= product.id %>" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="button delete-button">Delete</button>
+            </form>
+            <a href="/product-details/<%= product.id %>" class="examine-link">Examine &rarr;</a>
+          </div>
+        <% }) %>
+      </div>
+      
+      
+</body>
+</html>
